@@ -18,45 +18,71 @@ has 'url' => (
 	lazy => 1,
 	default => sub {
 		my($movie) = shift;
-		$movie->fandango_uri . '/' . $movie->id . '/movieoverview';
+		$movie->fandango_uri . '/' . $movie->id . '/'. $movie->type_url;
 	}
 );
 
+has 'type_url' => (
+	is => 'rw',
+	lazy => 1,
+	default => 'movieoverview',
+);
+
 has 'title' => (
-	is => 'ro',
+	is => 'rw',
 	lazy => 1,
 	default => sub {
 		my($movie) = shift;
 		
-		$movie->movieoverview->look_down(
-			_tag => 'li',
-			class => 'title'
-		)->as_trimmed_text;
+		if($movie->type_url eq 'summary') {
+			$movie->movieoverview->find('title')->as_text =~ m!(.+?) Synopsis$!;
+			return $1;
+		} else {
+			$movie->movieoverview->look_down(
+				_tag => 'li',
+				class => 'title'
+			)->as_trimmed_text;
+		};
 		
+		# croak "Issues getting title on ".$movie->url if $@;
 	}
 );
 
 
 has 'description' => (
-	is => 'ro',
+	is => 'rw',
 	lazy => 1,
 	default => sub {
 		my($movie) = shift;
+				
+		if($movie->type_url eq 'summary') {
+			my $syn = $movie->movieoverview->look_down(
+				_tag => 'div',
+				class => 'tab-content',
+			)->find('p');
+			
+			defined $syn ? $syn->as_text : qq\\;
+		} else {
 		
 		# syn => synopsis
-		my $syn = $movie->movieoverview->look_down(
-			'_tag' => 'li',
-			'class' => 'synopsis'
-		);
+			my $syn = $movie->movieoverview->look_down(
+				'_tag' => 'li',
+				'class' => 'synopsis'
+			);
 		
-		eval { # fandango might change this
-			$syn->look_down(
-				'_tag' => 'a',
-				'id' => 'read_more'
-			)->delete;
-		};
-		
-		$syn->as_trimmed_text;
+			eval { # fandango might change this
+				$syn->look_down(
+					'_tag' => 'a',
+					'id' => 'read_more'
+				)->delete;
+			};
+			
+			if (defined $syn) {
+				$syn->as_trimmed_text;
+			} else {
+				qq//;
+			}
+		}
 
 	}
 );

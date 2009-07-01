@@ -8,8 +8,11 @@ my $s = Net::Fandango::Search->new(
 	query => shift
 );
 
-for my $movie (@{ $s->movies }) {
-	print Dumper $movie;
+for my $movie ($s->movies) {
+	say "URL: ".$movie->url;
+	say $movie->title;
+	say $movie->description;
+	say "";
 }
 
 # print Dumper $m;
