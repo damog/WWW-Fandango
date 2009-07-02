@@ -27,7 +27,11 @@ sub movies {
 	my($search) = shift;
 		
 	map {
-		Net::Fandango::Movie->new(id => $_->[0], type_url => $_->[2], title => $_->[1]);
+		Net::Fandango::Movie->new(
+			id 			=> $_->[0], 
+			type_url 	=> $_->[2], 
+			title 		=> $_->[1]
+		)
 	} $search->search_on('Movies');
 	
 }

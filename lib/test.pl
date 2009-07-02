@@ -3,16 +3,27 @@
 use Modern::Perl;
 use Data::Dumper;
 use Net::Fandango::Search;
+use Net::Fandango::Location;
 
-my $s = Net::Fandango::Search->new(
-	query => shift
+my $m = Net::Fandango::Movie->new(
+	id => 'transformers:revengeofthefallen_111307'
 );
 
-for my $movie ($s->movies) {
-	say "URL: ".$movie->url;
-	say $movie->title;
-	say $movie->description;
-	say "";
-}
+$m->location(
+	Net::Fandango::Location->new(zip => 10039)
+);
 
-# print Dumper $m;
+$m->date(
+	DateTime->now->add(days => 1)
+);
+
+print Dumper $m->showtimes();
+
+# for my $movie ($s->movies) {
+# 	say "URL: ".$movie->url;
+# 	say $movie->title;
+# 	say $movie->description;
+# 	say "";
+# }
+# 
+# # print Dumper $m;
