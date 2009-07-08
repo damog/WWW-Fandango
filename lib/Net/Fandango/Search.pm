@@ -1,12 +1,12 @@
-package Net::Fandango::Search;
+package WWW::Fandango::Search;
 
 use Moose;
 use Modern::Perl;
 use Data::Dumper;
 
-use Net::Fandango::Movie;
+use WWW::Fandango::Movie;
 
-extends 'Net::Fandango';
+extends 'WWW::Fandango';
 
 has 'url' => (
 	is => 'ro',
@@ -27,7 +27,7 @@ sub movies {
 	my($search) = shift;
 		
 	map {
-		Net::Fandango::Movie->new(
+		WWW::Fandango::Movie->new(
 			id 			=> $_->[0], 
 			type_url 	=> $_->[2], 
 			title 		=> $_->[1]

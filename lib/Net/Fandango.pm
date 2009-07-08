@@ -1,4 +1,4 @@
-package Net::Fandango;
+package WWW::Fandango;
 
 use Moose;
 use Modern::Perl;
@@ -6,7 +6,7 @@ use Data::Dumper;
 use WWW::Mechanize;
 use HTML::TreeBuilder;
 
-our $VERSION = '0.0.1';
+our $VERSION = '0.0.1.1';
 
 # wha!
 
@@ -55,7 +55,7 @@ __PACKAGE__->meta->make_immutable;
 
 =head1 NAME
 
-Net::Fandango - Perl interface for the Fandango website
+WWW::Fandango - Perl interface for the Fandango website
 
 =head1 AUTHOR
 

@@ -1,16 +1,16 @@
-package Net::Fandango::Showtime;
+package WWW::Fandango::Showtime;
 
 use Moose;
 use Modern::Perl;
 
 has 'theater' => (
 	is => 'rw',
-	isa => 'Net::Fandango::Theater',
+	isa => 'WWW::Fandango::Theater',
 );
 
 has 'movie' => (
 	is => 'rw',
-	isa => 'Net::Fandango::Movie',
+	isa => 'WWW::Fandango::Movie',
 );
 
 has 'url' => (

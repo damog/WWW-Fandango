@@ -2,15 +2,15 @@
 
 use Modern::Perl;
 use Data::Dumper;
-use Net::Fandango::Search;
-use Net::Fandango::Location;
+use WWW::Fandango::Search;
+use WWW::Fandango::Location;
 
-my $m = Net::Fandango::Movie->new(
+my $m = WWW::Fandango::Movie->new(
 	id => 'transformers:revengeofthefallen_111307'
 );
 
 $m->location(
-	Net::Fandango::Location->new(zip => 10039)
+	WWW::Fandango::Location->new(zip => 10039)
 );
 
 $m->date(

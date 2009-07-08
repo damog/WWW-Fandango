@@ -1,14 +1,14 @@
-package Net::Fandango::Movie;
+package WWW::Fandango::Movie;
 
 use Moose;
 use Modern::Perl;
 use Data::Dumper;
 use autodie qw(:all);
-use Net::Fandango::Showtime;
-use Net::Fandango::Theater;
+use WWW::Fandango::Showtime;
+use WWW::Fandango::Theater;
 
 # wha!
-extends 'Net::Fandango';
+extends 'WWW::Fandango';
 
 has 'id' => (
 	is => 'rw',
@@ -52,7 +52,7 @@ has 'title' => (
 
 has 'location' => (
 	is => 'rw',
-	isa => 'Net::Fandango::Location',
+	isa => 'WWW::Fandango::Location',
 );
 
 has 'date' => (
@@ -134,12 +134,12 @@ sub _get_showtimes {
 			}
 			
 			push @showtimes, 
-				Net::Fandango::Showtime->new(
+				WWW::Fandango::Showtime->new(
 					url 		=> $showtime_url,
 					# datetime => '12:34:56'
 					datetime 	=> $new_date,
 					# movie 		=> $movie,
-					# theater 	=> Net::Fandango::Theater->new(id => $theaters[$count]->[0]),
+					# theater 	=> WWW::Fandango::Theater->new(id => $theaters[$count]->[0]),
 				);
 			
 			# print Dumper $i->as_HTML;

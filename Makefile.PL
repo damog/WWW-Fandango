@@ -1,6 +1,6 @@
 use inc::Module::Install;
 
-name           'Net-Fandango';
+name           'WWW-Fandango';
 all_from       'lib/Net/Fandango.pm';
 
 no_index directory => 'examples';

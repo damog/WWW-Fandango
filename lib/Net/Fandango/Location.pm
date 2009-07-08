@@ -1,4 +1,4 @@
-package Net::Fandango::Location;
+package WWW::Fandango::Location;
 
 use Moose;
 use Moose::Util::TypeConstraints;

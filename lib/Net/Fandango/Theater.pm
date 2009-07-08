@@ -1,8 +1,8 @@
-package Net::Fandango::Theater;
+package WWW::Fandango::Theater;
 
 use Moose;
 
-extends 'Net::Fandango';
+extends 'WWW::Fandango';
 
 has 'id' => (
 	is => 'rw',
