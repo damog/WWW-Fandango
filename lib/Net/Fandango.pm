@@ -5,7 +5,8 @@ use Modern::Perl;
 use Data::Dumper;
 use WWW::Mechanize;
 use HTML::TreeBuilder;
-use autodie qw(:all);
+
+our $VERSION = '0.0.1';
 
 # wha!
 
@@ -51,3 +52,11 @@ sub _mech {
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
+
+=head1 NAME
+
+Net::Fandango - Perl interface for the Fandango website
+
+=head1 AUTHOR
+
+David Moreno, david@axiombox.com.

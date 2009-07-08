@@ -30,6 +30,16 @@ has 'name' => (
 	}
 );
 
+has 'address' => (
+	is => 'ro',
+	lazy => 1,
+	default => sub {
+		$_[0]->theaterpage->look_down(
+			'_tag' => 'div', 'class' => 'info'
+		)->look_down('_tag' => 'p')->as_trimmed_text;
+	}
+);
+
 has 'map_url' => (
 	is => 'ro',
 	lazy => 1,

@@ -87,7 +87,7 @@ sub _get_showtimes {
 	my $t = $movie->p->parse( $movie->mech->content );
 	
 	my @theaters;
-	for my $t ($t->look_down('_tag' => 'div', 'class' => qr/^theater wired/i)) {
+	for my $t ($t->look_down('_tag' => 'div', 'class' => qr/^theater (?:non)?wired/i)) {
 		my $h3 = $t->find('h3');
 		
 		my $name = $h3->as_text;
@@ -111,12 +111,12 @@ sub _get_showtimes {
 				$showtime = $i->as_trimmed_text;
 			}
 			
-			my $showtime_url = qq@@; # ;-)
+			my $showtime_url = qq@#@; # ;-)
 			
 			if(my $u = $i->find('a')) {
 				$showtime_url = $u->attr('href');
 			}
-
+			
 			my($h, $m, $apm) = $showtime =~ /^(\d{1,2}):(\d{1,2})(am)?$/;
 			
 			my $new_date = DateTime->new(
@@ -136,9 +136,10 @@ sub _get_showtimes {
 			push @showtimes, 
 				Net::Fandango::Showtime->new(
 					url 		=> $showtime_url,
+					# datetime => '12:34:56'
 					datetime 	=> $new_date,
-					movie 		=> $movie,
-					theater 	=> Net::Fandango::Theater->new(id => $theaters[$count]->[0]),
+					# movie 		=> $movie,
+					# theater 	=> Net::Fandango::Theater->new(id => $theaters[$count]->[0]),
 				);
 			
 			# print Dumper $i->as_HTML;

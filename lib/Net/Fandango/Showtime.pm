@@ -16,7 +16,7 @@ has 'movie' => (
 has 'url' => (
 	is => 'rw',
 	isa => 'Str',
-	reader => { 'url' => sub { URI->new(shift) } },
+	# reader => { 'url' => sub { URI->new(shift)->as_string } },
 );	
 
 has 'datetime' => (
